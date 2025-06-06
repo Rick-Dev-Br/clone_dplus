@@ -1,0 +1,26 @@
+{
+  "name": "clone_dplus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rick-Dev-Br/clone_dplus.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Rick-Dev-Br/clone_dplus/issues"
+  },
+  "homepage": "https://github.com/Rick-Dev-Br/clone_dplus#readme",
+  "devDependencies": {
+    "gulp": "^5.0.1",
+    "gulp-dart-sass": "^1.1.0"
+  }
+}
