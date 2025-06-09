@@ -1,26 +1,31 @@
 {
-  "name": "clone_dplus",
+  "name": "clone_disneyplus",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "gulp watch",
     "build": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rick-Dev-Br/clone_dplus.git"
+    "url": "git+https://github.com/ogiansouza/clone_disneyplus.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/Rick-Dev-Br/clone_dplus/issues"
+    "url": "https://github.com/ogiansouza/clone_disneyplus/issues"
   },
-  "homepage": "https://github.com/Rick-Dev-Br/clone_dplus#readme",
+  "homepage": "https://github.com/ogiansouza/clone_disneyplus#readme",
   "devDependencies": {
-    "gulp": "^5.0.1",
-    "gulp-dart-sass": "^1.1.0"
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "gulp-uglify": "^3.0.2",
+    "sass": "^1.56.1"
+  },
+  "dependencies": {
+    "gulp-imagemin": "^7.1.0"
   }
 }
