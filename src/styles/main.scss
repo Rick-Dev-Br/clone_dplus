@@ -1,67 +1,76 @@
+// Importação de módulos SCSS
 @use 'variaveis';
 @use 'hero';
+@use 'shows';
+@use 'plans';
 
+// Definição da fonte Avenir (regular)
 @font-face {
     font-family: Avenir;
     src: url(../../assets/fonts/Avenir-Regular.woff2);
-    font-weight: 400;
+    font-weight: 400; // Peso normal
 }
 
+// Definição da fonte Avenir (negrito)
 @font-face {
     font-family: Avenir;
     src: url(../../assets/fonts/Avenir-bold.woff2);
-    font-weight: 700;
+    font-weight: 700; // Peso bold
 }
 
+/* Reset básico para todos os elementos */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0;          // Remove margens padrão
+    padding: 0;         // Remove paddings padrão
+    box-sizing: border-box; // Mantém dimensões incluindo bordas
+    font-family: Avenir, sans-serif; // Define fonte padrão
 }
 
+/* Estilos do corpo da página */
 body {
-    background-color: variaveis.$corDeFundo;
-    font-family: Avenir, sans-serif;
+    background-color: variaveis.$corDeFundo; // Cor do fundo usando variável
 }
 
+/* Mixin para texto padrão (reutilizável) */
 @mixin text($fontSize: 16px) {
     font-size: $fontSize;
-    line-height: $fontSize + 10px;
-    color: variaveis.$corTextoPrincipal
+    line-height: $fontSize + 10px; // Altura da linha 10px > que fonte
+    color: variaveis.$corTextoPrincipal; // Cor do texto principal
 }
 
+/* Mixin para títulos (herda do mixin de texto) */
 @mixin title($fontSize: 40px) {
-    @include text($fontSize);
-    color: variaveis.$corTextoSecundario;
+    @include text($fontSize); // Herda propriedades do mixin text
+    color: variaveis.$corTextoSecundario; // Cor diferente para títulos
 }
 
-.text--big {
-    @include text(18px);
-}
+/* Classes utilitárias para tamanhos de texto */
+.text--big { @include text(18px); }   // Texto grande
+.text      { @include text; }         // Texto padrão (16px)
+.text--small { @include text(12px); } // Texto pequeno
 
-.text {
-    @include text;
-}
+/* Classes utilitárias para títulos */
+.title--big { @include title(44px); } // Título grande
+.title      { @include title; }       // Título padrão (40px)
+.title--sm  { @include title(28px); } // Título pequeno
 
-.text--small {
-    @include text(12px);
-}
-
-.title--big {
-    @include title(44px);
-}
-
-.title {
-    @include title;
-}
-
-.title--sm {
-    @include title(28px);
-}
-
+/* Estilo especial para links */
 .link-text {
     @include text(18px);
     color: variaveis.$corTextoSecundario;
-    text-decoration: underline;
+    text-decoration: underline; // Sublinhado padrão para links
 }
 
+/* Estilo base para botões */
+.button {
+    display: block;
+    width: 100%; // Largura total do container
+    height: 60px;
+    font-size: 18px;
+    color: variaveis.$corTextoSecundario;
+    background-color: #6421ff; // Cor fixa de fundo
+    text-transform: uppercase; // Texto em maiúsculas
+    border-radius: 4px;       // Bordas arredondadas
+    margin-top: 2vw;          // Margem responsiva (viewport width)
+    margin-bottom: 8px;
+}

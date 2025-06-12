@@ -1,0 +1,54 @@
+// Importa variáveis de cores e tamanhos
+@use 'variaveis';
+
+/* Container principal da seção "Shows" */
+.shows {
+    padding: 2vw 5.6vw;         // Padding responsivo (vertical, horizontal)
+    min-height: 50vw;           // Altura mínima responsiva
+
+    /* Lista de itens (inicialmente oculta) */
+    &__list {
+        margin-top: 44px;
+        display: none;           // Oculta por padrão
+        grid-template-columns: 1fr 1fr 1fr; // Grid de 3 colunas
+        gap: 24px;               // Espaço entre itens
+
+        /* Modificador para lista visível */
+        &--is--active {
+            display: grid;      // Exibe como grid quando ativo
+        }
+
+        /* Estilos dos itens individuais */
+        &__item {
+            // Estilo das imagens dentro dos itens
+            img {
+                max-width: 100%; // Imagem responsiva
+                border-radius: 4px; // Bordas arredondadas
+            }
+        }
+    }
+
+    /* Container dos botões de controle (tabs) */
+    &__tabs {
+        display: flex;
+        justify-content: center; // Centraliza os botões
+
+        /* Estilo base dos botões */
+        &__button {
+            color: variaveis.$corTextoSecundario;
+            font-size: 20px;
+            border: none;        // Remove borda padrão
+            padding-bottom: 5px;
+            background: none;    // Fundo transparente
+            text-transform: uppercase; // Texto em maiúsculas
+            margin: 0 1vw;      // Margem horizontal responsiva
+            cursor: pointer;     // Cursor de apontar
+            border-bottom: 5px solid transparent; // Borda invisível
+
+            /* Estado ativo do botão */
+            &--is--active {
+                border-color: variaveis.$corTextoSecundario; // Borda visível
+            }
+        }
+    }
+}
