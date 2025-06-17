@@ -13,6 +13,10 @@
         grid-template-columns: 1fr 1fr 1fr; // Grid de 3 colunas
         gap: 24px;               // Espaço entre itens
 
+        @media (max-width: 768px) {   // Redimensiona para telas menores 
+            grid-template-columns: 1fr 1fr; // Grid de 2 colunas
+
+        }
         /* Modificador para lista visível */
         &--is--active {
             display: grid;      // Exibe como grid quando ativo
@@ -33,6 +37,12 @@
         display: flex;
         justify-content: center; // Centraliza os botões
 
+        @media (max-width: 768px) {
+            white-space: nowrap;
+            overflow-x: scroll;
+            padding-left: 18px;
+        }
+
         /* Estilo base dos botões */
         &__button {
             color: variaveis.$corTextoSecundario;
@@ -48,6 +58,10 @@
             /* Estado ativo do botão */
             &--is--active {
                 border-color: variaveis.$corTextoSecundario; // Borda visível
+            }
+
+            @media (max-width: 768px) {
+                font-size: 16px;
             }
         }
     }

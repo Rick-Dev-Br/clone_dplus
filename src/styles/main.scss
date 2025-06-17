@@ -3,6 +3,10 @@
 @use 'hero';
 @use 'shows';
 @use 'plans';
+@use 'available-devices';
+@use 'faq';
+@use 'footer';
+@use 'header';
 
 // Definição da fonte Avenir (regular)
 @font-face {
@@ -24,6 +28,7 @@
     padding: 0;         // Remove paddings padrão
     box-sizing: border-box; // Mantém dimensões incluindo bordas
     font-family: Avenir, sans-serif; // Define fonte padrão
+    list-style: none;   // Remove marcadores de lista
 }
 
 /* Estilos do corpo da página */
@@ -31,46 +36,183 @@ body {
     background-color: variaveis.$corDeFundo; // Cor do fundo usando variável
 }
 
-/* Mixin para texto padrão (reutilizável) */
+// Mixin para estilos de texto base
 @mixin text($fontSize: 16px) {
     font-size: $fontSize;
-    line-height: $fontSize + 10px; // Altura da linha 10px > que fonte
+    line-height: $fontSize + 10px; // Altura da linha: tamanho da fonte + 10px
     color: variaveis.$corTextoPrincipal; // Cor do texto principal
 }
 
-/* Mixin para títulos (herda do mixin de texto) */
+// Mixin para estilos de título (usa o mixin de texto e altera a cor)
 @mixin title($fontSize: 40px) {
-    @include text($fontSize); // Herda propriedades do mixin text
-    color: variaveis.$corTextoSecundario; // Cor diferente para títulos
+    @include text($fontSize); // Herda as propriedades do mixin de texto
+    color: variaveis.$corTextoSecundario; // Cor secundária para títulos
 }
 
 /* Classes utilitárias para tamanhos de texto */
-.text--big { @include text(18px); }   // Texto grande
-.text      { @include text; }         // Texto padrão (16px)
-.text--small { @include text(12px); } // Texto pequeno
+.text--big {
+    @include text(18px); // Texto grande (18px)
+    
+    // Responsividade: reduz tamanho em dispositivos móveis
+    @media (max-width: 768px) {
+        @include text(15px); // Tamanho reduzido para 15px
+    }
+}
+
+.text {
+    @include text; // Texto padrão (16px)
+    
+    // Responsividade: reduz tamanho em dispositivos móveis
+    @media (max-width: 768px) {
+        @include text(14px); // Tamanho reduzido para 14px
+    }
+}
+
+.text--small {
+    @include text(12px); // Texto pequeno (12px)
+    
+    // Responsividade: reduz tamanho em dispositivos móveis
+    @media (max-width: 768px) {
+        @include text(11px); // Tamanho reduzido para 11px
+    }
+}
 
 /* Classes utilitárias para títulos */
-.title--big { @include title(44px); } // Título grande
-.title      { @include title; }       // Título padrão (40px)
-.title--sm  { @include title(28px); } // Título pequeno
+.title--big {
+    @include title(44px); // Título grande (44px)
+    
+    // Responsividade: reduz tamanho em dispositivos móveis
+    @media (max-width: 768px) {
+        @include title(26px); // Tamanho reduzido para 26px
+    }
+}
 
-/* Estilo especial para links */
+.title {
+    @include title; // Título padrão (40px)
+    
+    // Responsividade: reduz tamanho em dispositivos móveis
+    @media (max-width: 768px) {
+        @include title(24px); // Tamanho reduzido para 24px
+    }
+}
+
+.title--sm {
+    @include title(28px); // Título pequeno (28px)
+    
+    // Responsividade: reduz tamanho em dispositivos móveis
+    @media (max-width: 768px) {
+        @include title(24px); // Tamanho reduzido para 24px
+    }
+}
+
+/* Estilo para links de texto */
 .link-text {
-    @include text(18px);
-    color: variaveis.$corTextoSecundario;
-    text-decoration: underline; // Sublinhado padrão para links
+    @include text(18px); // Tamanho de 18px
+    color: variaveis.$corTextoSecundario; // Cor secundária
+    text-decoration: underline; // Texto sublinhado
 }
 
 /* Estilo base para botões */
 .button {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%; // Largura total do container
     height: 60px;
     font-size: 18px;
     color: variaveis.$corTextoSecundario;
-    background-color: #6421ff; // Cor fixa de fundo
+    background-color: variaveis.$corDeFundoBotaoPrimario; // Cor de fundo primária
     text-transform: uppercase; // Texto em maiúsculas
-    border-radius: 4px;       // Bordas arredondadas
-    margin-top: 2vw;          // Margem responsiva (viewport width)
-    margin-bottom: 8px;
+    border-radius: 4px; // Bordas arredondadas
+    text-decoration: none; // Remove sublinhado
+    padding: 8px 14px;
+    letter-spacing: 1px; // Espaçamento entre letras
+    border: 1px solid variaveis.$corDeFundoBotaoPrimario; // Borda com mesma cor do fundo
+
+    // Efeito hover: clareia a cor de fundo em 3%
+    &:hover {
+        background-color: lighten(variaveis.$corDeFundoBotaoPrimario, 3%);
+    }
+
+    // Modificador: botão secundário
+    &--secondary {
+        background-color: variaveis.$corDeFundoBotaoSecundario;
+        border-color: variaveis.$corDeFundoBotaoSecundario;
+
+        // Efeito hover para o botão secundário
+        &:hover {
+            background-color: lighten(variaveis.$corDeFundoBotaoSecundario, 3%);
+        }
+    }
+
+    // Modificador: botão escuro
+    &--dark {
+        background-color: rgba(variaveis.$corDeFundoBotaoDark, 0.8); // Fundo escuro com transparência
+        border-color: variaveis.$corTextoSecundario; // Borda com cor secundária
+
+        // Efeito hover: fundo secundário e texto escuro
+        &:hover {
+            background-color: variaveis.$corTextoSecundario;
+            color: variaveis.$corDeFundo; // Cor do fundo do tema (clara)
+        }
+    }
+}
+
+/* Seção com imagem e texto lado a lado */
+.image-text-section {
+    padding: 5.6vw; // Padding relativo à largura da viewport
+    display: grid;
+    grid-template-columns: 1fr 1fr; // Duas colunas de tamanho igual
+    align-items: center;
+
+    // Layout de bloco único em telas menores
+    @media (max-width: 768px) {
+        display: block;
+    }
+
+    // Estilo para imagens dentro da seção
+    img {
+        max-width: 100%; // Imagem responsiva
+    }
+
+    // Container de texto dentro da seção
+    &__text_container {
+        padding: 0 2vw; // Padding horizontal relativo
+
+        // Margem inferior para títulos
+        h2 {
+            margin-bottom: 24px;
+        }
+    }
+
+    // Modificador: imagem em largura total
+    &--image-full-width {
+        display: block; // Altera o display para bloco
+        position: relative; // Contexto de posicionamento
+
+        // Imagem ocupa 100% da largura
+        img {
+            width: 100%;
+        }
+
+        // Container de texto posicionado sobre a imagem
+        &__text_container {
+            position: absolute; // Posicionamento absoluto
+            top: 0; // Alinhado ao topo
+            left: 50%; // Começa a partir do meio
+            height: 100%; // Altura total
+            width: calc(50% - 5.6vw); // Largura: 50% menos o padding da seção
+            display: flex;
+            flex-direction: column;
+            justify-content: center; // Centraliza verticalmente
+
+            // Em telas pequenas, volta ao fluxo normal
+            @media (max-width: 768px) {
+                display: block;
+                position: relative;
+                left: 0;
+                width: 100%; // Largura total
+            }
+        }
+    }
 }
